@@ -1,0 +1,128 @@
+create database animation;
+use animation;
+ create TABLE animation_projects (
+    project_id INT PRIMARY KEY,
+    title VARCHAR(100),
+    release_year INT,
+    genre VARCHAR(50),
+    duration_min INT,
+    director VARCHAR(100),
+    budget_million DECIMAL(10,2),
+    status VARCHAR(20)
+);
+
+INSERT INTO animation_projects (project_id, title, release_year, genre, duration_min, director, budget_million, status)
+VALUES
+(1, 'Skyward Legends', 2023, 'Fantasy', 95, 'Aiko Tanaka', 12.50, 'Released'),
+(2, 'Robo Rumble', 2025, 'Action', 110, 'Carlos Mendoza', 18.00, 'In Production'),
+(3, 'Fluffy\'s Big Day', 2022, 'Comedy', 82, 'Lisa Brooks', 6.75, 'Released'),
+(4, 'The Silent Planet', 2024, 'Sci-Fi', 105, 'Kenji Yamamoto', 15.25, 'Released'),
+(5, 'Wisp and the Moon', 2025, 'Adventure', 97, 'Ananya Rao', 10.00, 'Post-Production');
+select * from animation_projects;
+select title from animation_projects where status like 're%';
+select title from animation_projects where status like 'po%';
+select * from animation_projects where release_year in (2023,2025,2022);
+drop table animation_projects;
+
+
+
+
+CREATE TABLE table1 (  
+    num_value INT  
+);   
+INSERT INTO table1 (num_value)   
+VALUES(10), (20), (25);  
+  
+CREATE TABLE table2 (  
+    num_val int  
+);   
+INSERT INTO table2 (num_val)  
+VALUES(20), (7), (10);  
+drop table table2;
+
+
+selECT * FROM table2  ;
+selECT * FROM table1  ;
+
+
+SELECT num_value FROM table1 WHERE num_value > ANY (SELECT num_val FROM table2 where num_val > 10 order by num_value ) ;   
+
+
+select * from table1  where num_value > 10;
+INSERT INTO table1 (num_value)   
+VALUES(100), (200), (50);  
+SELECT num_value FROM table1 WHERE num_value > ANY (SELECT num_val FROM table2 ) ;   
+
+
+create TABLE game_projects (
+    project_id INT PRIMARY KEY,
+    title VARCHAR(100),
+    release_year INT,
+    genre VARCHAR(50),
+    duration_min INT,
+    director VARCHAR(100),
+    budget_million DECIMAL(10,2),
+    status VARCHAR(20)
+);
+INSERT INTO game_projects (project_id, title, release_year, genre, duration_min, director, budget_million, status)
+VALUES
+(1, 'Skyward Legends', 2023, 'Fantasy', 25, 'Aiko Tanaka', 12.50, 'Released'),
+(7, 'Robo Rumble', 2025, 'Action', 2555, 'Carlos Mendoza', 18.00, 'In Production'),
+(8, 'Fluffy\'s Big Day', 2022, 'Comedy', 645, 'Lisa Brooks', 6.75, 'Released'),
+(9, 'The Silent Planet', 2024, 'Sci-Fi', 852, 'Kenji Yamamoto', 15.25, 'Released'),
+(10, 'Wisp and the Moon', 2025, 'Adventure',45, 'Ananya Rao', 10.00, 'Post-Production');
+
+
+select * from animation_projects;
+select * from game_projects;
+
+
+
+
+SELECT duration_min FROM animation_projects WHERE duration_min > ANY (SELECT duration_min FROM game_projects where duration_min);
+
+select duration_min from animation_projects;
+select duration_min from game_projects;
+SELECT title,budget_million  
+FROM animation_projects  
+WHERE project_id BETWEEN 1 AND 3;  
+SELECT *  
+FROM animation_projects  
+WHERE duration_min BETWEEN  ('100') AND  ('200'); 
+  
+  
+  SELECT *  
+FROM animation_projects  
+WHERE title IS  NULL;  
+
+SELECT *  
+FROM animation_projects  
+WHERE title NOT IN ('Skyward Legends','Robo Rumble','The Silent Planet');  
+
+SELECT *  
+FROM animation_projects  
+WHERE title IS NOT NULL;  
+
+
+SELECT *  
+FROM animation_projects  
+WHERE status NOT LIKE 'r%';  
+ 
+ 
+ 
+ show tables;
+ 
+ select * from table1;
+ select * from table2;
+ 
+ 
+ 
+ SELECT   t1.title,t1.genre,t2.budget_million
+FROM animation_projects as t1
+INNER JOIN game_projects  as t2
+ON t1.project_id= t2.project_id;  
+ SELECT   t1.title,t1.genre,t2.budget_million
+FROM animation_projects as t1
+INNER JOIN game_projects  as t2
+ON t1.project_id= t2.project_id;  
+  
